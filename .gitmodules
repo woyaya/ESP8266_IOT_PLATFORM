@@ -1,0 +1,7 @@
+[submodule "paho.mqtt.embedded-c"]
+	path = paho.mqtt.embedded-c
+	url = https://github.com/woyaya/paho.mqtt.embedded-c.git
+	branch = esp8266
+[submodule "esp-gdbstub"]
+	path = esp-gdbstub
+	url = https://github.com/woyaya/esp-gdbstub.git

@@ -27,13 +27,20 @@ void configLoadDefaults() {
 //	memcpy(&myConfig.macData[0], &maca, sizeof(LampMacType));
 //	memcpy(&myConfig.macData[1], &macb, sizeof(LampMacType));
 //	myConfig.wifiChan=6;
-
+#if LIGHT_DEVICE
 	//Default button values: red, green, blue, white, off
 	myConfig.bval[0].r=22222;
 	myConfig.bval[1].g=22222;
 	myConfig.bval[2].b=22222;
 	myConfig.bval[3].cw=22222;
-	myConfig.bval[3].ww=22222;
+	myConfig.bval[4].ww=22222;
+#endif
+#if HASS_NODE || ALEXA_NODE
+	for (i=0;i<ARRAY_SIZE(myConfig.nodes);++i)
+	{
+		user_node_init(NODE(i), i);
+	}
+#endif
 	for (i=0; i<CONFIG_MAC_CNT; i++) myConfig.wlanChannel[i]=1;
 }
 

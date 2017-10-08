@@ -42,6 +42,10 @@
 
 #endif
 
+#ifdef HAVE_GDB
+#include <../esp-gdbstub/gdbstub.h>
+#endif
+
 #ifdef SERVER_SSL_ENABLE
 #include "ssl/cert.h"
 #include "ssl/private_key.h"
@@ -127,6 +131,10 @@ uint32 user_rf_cal_sector_set(void)
 *******************************************************************************/
 void user_init(void)
 {
+#ifdef HAVE_GDB
+    gdbstub_init();
+#endif
+
     printf("SDK version:%s,%u\n", system_get_sdk_version(),__LINE__ );
     wifi_set_opmode(STATIONAP_MODE);
     

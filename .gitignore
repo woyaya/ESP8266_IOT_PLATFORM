@@ -1,0 +1,12 @@
+*.swp
+*.o
+*.a
+.output
+driver/.output
+upgrade/.output
+user/.output
+install
+bin
+libesphttpd/build
+libesphttpd/espfs/mkespfsimage/mkespfsimage
+libesphttpd/webpages.espfs

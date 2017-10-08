@@ -13,8 +13,6 @@
 #include "user_esp_platform.h"
 #include "user_esp_platform_timer.h"
 
-#define DEBUG
-
 #ifdef DEBUG
 #define TM_DEBUG os_printf
 #else

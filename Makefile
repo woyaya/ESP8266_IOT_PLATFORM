@@ -12,8 +12,10 @@
 #     a generated lib/image xxx.a ()
 #
 TARGET = eagle
-#FLAVOR = release
-FLAVOR = debug
+FLAVOR = release
+#FLAVOR = debug
+
+export TARGET FLAVOR
 
 #EXTRA_CCFLAGS += -u
 
@@ -24,13 +26,20 @@ SPECIAL_MKTARGETS=$(APP_MKTARGETS)
 SUBDIRS=    \
 	user    \
 	driver  \
-	upgrade
+	upgrade \
+	esp-gdbstub \
+	paho.mqtt.embedded-c
 
 endif # } PDIR
 
 LDDIR = $(SDK_PATH)/ld
 
-CCFLAGS += -Os
+ifeq ($(FLAVOR),debug)
+CCFLAGS += -g -Og -DDEBUG -DHAVE_GDB
+else
+CCFLAGS += -Os -DRELEASE
+endif
+CCFLAGS += -I$(SDK_PATH)/include/espressif/esp8266
 
 TARGET_LDFLAGS =		\
 	-nostdlib		\
@@ -39,11 +48,12 @@ TARGET_LDFLAGS =		\
 	--text-section-literals
 
 ifeq ($(FLAVOR),debug)
-    TARGET_LDFLAGS += -g -O2
+#    TARGET_LDFLAGS += -g -O2
+    TARGET_LDFLAGS += -g -ggdb
 endif
 
 ifeq ($(FLAVOR),release)
-    TARGET_LDFLAGS += -g -O0
+    TARGET_LDFLAGS += -g -O2
 endif
 
 dummy: all
@@ -57,7 +67,9 @@ libesphttpd/libwebpages-espfs.a: libesphttpd/Makefile
 COMPONENTS_eagle.app.v6 = \
 	user/libuser.a  \
 	driver/libdriver.a \
-	upgrade/libupgrade.a
+	upgrade/libupgrade.a \
+	esp-gdbstub/libgdbstub.a \
+	paho.mqtt.embedded-c/libmqtt.a
 
 LINKFLAGS_eagle.app.v6 = \
 	-L$(SDK_PATH)/lib        \

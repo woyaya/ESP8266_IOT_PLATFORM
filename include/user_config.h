@@ -9,11 +9,14 @@
 #define HTTPD_SERVER            1
 #define WEB_SERVICE             0
 
+/*support one or more kinds of node at the same project*/
+#define HASS_NODE		1	//node for home-assistant
+#define ALEXA_NODE		1	//node for amazon alexa
+#define MAX_NODE_NUMBER		4
 /*support one device at the same project*/
 #define PLUG_DEVICE             1
 #define LIGHT_DEVICE            0
 #define SENSOR_DEVICE           0 //TBD
-
 
 #if LIGHT_DEVICE
 #define USE_US_TIMER

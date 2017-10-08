@@ -32,7 +32,7 @@
 #if ESP_PLATFORM
 
 //#define DEMO_TEST /*for test*/
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
 #define ESP_DBG os_printf
